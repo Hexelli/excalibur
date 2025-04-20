@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-    "scripts": {
-      "build": "vite build",
-      "lint": "eslint . --ext .ts,.tsx",
-      "start": "electron .",
-      "tsc": "tsc --noEmit"
-    },
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint . --ext .ts,.tsx",
+    "start": "electron .",
+    "tsc": "tsc --noEmit"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hexelli/excalibur.git"
@@ -22,6 +22,10 @@
   },
   "homepage": "https://github.com/Hexelli/excalibur#readme",
   "dependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "typescript": "^5.8.3",
