@@ -26,8 +26,8 @@ export const DrawingBoard = () => {
     yarray.observe(() => {
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext('2d');
-      if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!canvas || !ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);      
       yarray.toArray().forEach((line: any) => {
         ctx.beginPath();
         ctx.moveTo(line[0].x, line[0].y);
