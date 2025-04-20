@@ -1,9 +1,18 @@
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
-    env: {
-      browser: true,
-      node: true,
-      es2021: true,
-      electron: true,
+    languageOptions: {
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        project: './tsconfig.json',
+        createDefaultProgram: true,
+      },
+      globals: {
+        browser: 'readonly',
+        node: 'readonly',
+        electron: 'readonly',
+      },
     },
     extends: [
       'eslint:recommended',
@@ -11,13 +20,6 @@ module.exports = {
       'plugin:@typescript-eslint/recommended',
       'plugin:react/jsx-runtime',
     ],
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      ecmaVersion: 2021,
-      sourceType: 'module',
-      project: './tsconfig.json',
-      createDefaultProgram: true,
-    },
     plugins: ['react', '@typescript-eslint'],
     rules: {
       'react/react-in-jsx-scope': 'off',
