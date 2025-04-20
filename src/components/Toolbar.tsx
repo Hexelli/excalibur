@@ -2,13 +2,13 @@ import React from 'react';
 
 export const Toolbar = () => {
   const saveToFile = () => {
-    const data = localStorage.getItem('exclonidraw-data');
+    const data = localStorage.getItem('excalibur-data');
     if (data) {
       const blob = new Blob([data], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'drawing.exclonidraw.json';
+      a.download = 'drawing.excalibur.json';
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -20,7 +20,7 @@ export const Toolbar = () => {
     const reader = new FileReader();
     reader.onload = () => {
       const content = reader.result as string;
-      localStorage.setItem('exclonidraw-data', content);
+      localStorage.setItem('excalibur-data', content);
       window.location.reload();
     };
     reader.readAsText(file);

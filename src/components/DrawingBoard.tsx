@@ -7,15 +7,15 @@ export const DrawingBoard = () => {
 
   useEffect(() => {
     const ydoc = new Y.Doc();
-    const provider = new WebrtcProvider('exclonidraw-room', ydoc);
+    const provider = new WebrtcProvider('excalibur-room', ydoc);
     const yarray = ydoc.getArray('drawings');
 
     const saveData = () => {
       const saved = JSON.stringify(yarray.toArray());
-      localStorage.setItem('exclonidraw-data', saved);
+      localStorage.setItem('excalibur-data', saved);
     };
 
-    const savedData = localStorage.getItem('exclonidraw-data');
+    const savedData = localStorage.getItem('excalibur-data');
     if (savedData) {
       try {
         const lines = JSON.parse(savedData);

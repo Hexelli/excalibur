@@ -1,32 +1,38 @@
-/** @type {import("eslint").Linter.Config} */
-module.exports = {
+const reactPlugin = require("eslint-plugin-react");
+const tseslint = require("typescript-eslint");
+
+module.exports = [
+  {
+    ignores: ["node_modules/**", "dist/**", "build/**", "eslint.config.js"],
+  },
+  {
+    files: ["**/*.{ts,tsx,js,jsx}"],
     languageOptions: {
-      parser: '@typescript-eslint/parser',
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: 2021,
-        sourceType: 'module',
-        project: './tsconfig.json',
+        sourceType: "module",
+        project: "./tsconfig.json",
         createDefaultProgram: true,
       },
       globals: {
-        browser: 'readonly',
-        node: 'readonly',
-        electron: 'readonly',
+        window: "readonly",
+        document: "readonly",
+        process: "readonly",
       },
     },
-    extends: [
-      'eslint:recommended',
-      'plugin:react/recommended',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:react/jsx-runtime',
-    ],
-    plugins: ['react', '@typescript-eslint'],
-    rules: {
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      'no-console': 'warn',
+    plugins: {
+      react: reactPlugin,
+      "@typescript-eslint": tseslint.plugin,
     },
-  };
-  
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      ...reactPlugin.configs.recommended.rules,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "no-console": "warn",
+    },
+  },
+];
