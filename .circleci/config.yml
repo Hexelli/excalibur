@@ -1,32 +1,67 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:node:.
 version: 2.1
-orbs:
-  node: circleci/node@5
+
+executors:
+  node-executor:
+    docker:
+      - image: cimg/node:20.5.0
+    working_directory: ~/exclonidraw
+
 jobs:
-  test-node:
-    # Install node dependencies and run tests
-    executor: node/default
+  install:
+    executor: node-executor
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: npm
       - run:
-          name: Run tests
-          command: echo \"No test specified in package.json\"
-  deploy:
-    # This is an example deploy job, not actually used by the workflow
-    docker:
-      - image: cimg/base:stable
+          name: Install dependencies
+          command: npm ci
+
+  typecheck:
+    executor: node-executor
     steps:
-      # Replace this with steps to deploy to users
+      - checkout
+      - run: npm ci
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: Run TypeScript type check
+          command: npx tsc --noEmit
+
+  lint:
+    executor: node-executor
+    steps:
+      - checkout
+      - run: npm ci
+      - run:
+          name: Run linter
+          command: npm run lint
+
+  build:
+    executor: node-executor
+    steps:
+      - checkout
+      - run: npm ci
+      - run:
+          name: Build React app
+          command: npm run build
+      - run:
+          name: Electron build (optional)
+          command: |
+            if [ -f "electron-builder.yml" ]; then
+              npx electron-builder --dir
+            else
+              echo "Skipping electron build (no config)"
+            fi
+
 workflows:
+  version: 2
   build-and-test:
     jobs:
-      - test-node
-    # - deploy:
-    #     requires:
-    #       - test-node
+      - install
+      - typecheck:
+          requires:
+            - install
+      - lint:
+          requires:
+            - install
+      - build:
+          requires:
+            - typecheck
+            - lint
