@@ -1,0 +1,33 @@
+{
+  "name": "excalibur",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hexelli/excalibur.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hexelli/excalibur/issues"
+  },
+  "homepage": "https://github.com/Hexelli/excalibur#readme",
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.3",
+    "y-webrtc": "^10.3.0",
+    "y-websocket": "^3.0.0",
+    "yjs": "^13.6.26",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "electron": "^35.2.0"
+  }
+}
